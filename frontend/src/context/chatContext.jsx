@@ -15,7 +15,7 @@ export const ChatProvider = ({children})=>{
     // FUNCTION TO GET ALL USERS FOR SIDEBAR
     const getUsers = async() =>{
         try{
-           const {data} = await axios.get("http://localhost:5001/api/messages/users");
+           const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/messages/users`);
            if(data.success){
             setUsers(data.users);
             setUnseenMessages(data.unseenMessages);
@@ -30,7 +30,7 @@ export const ChatProvider = ({children})=>{
     // FUNCTION TO GET MESSAGES FOR SELECTED USER
     const getMessages = async(userId)=>{
         try{
-            const {data} = await axios.get(`http://localhost:5001/api/messages/${userId}`);
+            const {data} = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/messages/${userId}`);
             if(data.success){
              setMessages(data.messages);
             }
@@ -42,7 +42,7 @@ export const ChatProvider = ({children})=>{
     // FUNCTION TO SEND MESSAGE TO SELECTED USER
     const sendMessage = async(messageData)=>{
         try{
-            const {data} = await axios.post(`http://localhost:5001/api/messages/send/${selectedUser._id}`, messageData);
+            const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/messages/send/${selectedUser._id}`, messageData);
             if(data.success){
                 setMessages((prevMessages)=>[...prevMessages , data.newMessage])
 
