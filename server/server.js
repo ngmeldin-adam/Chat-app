@@ -8,13 +8,8 @@ import {Server} from  "socket.io";
 
 
  const app = express();
+app.use(express.json())
  const server = http.createServer(app);
-
- // Initalize socket.io server
- export const io = new Server(server,{
-   cors:{origin:"*"}
- })
-
 
  const connect = async () => {
   try {
@@ -25,6 +20,13 @@ import {Server} from  "socket.io";
   }
 };
  connect();
+ // Initalize socket.io server
+ export const io = new Server(server,{
+   cors:{origin:"*"}
+ })
+
+
+
  //STORE ONLINE USERS
  export const userSocketMap = {};
 
