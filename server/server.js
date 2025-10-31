@@ -2,7 +2,6 @@ import express from 'express'
 import  "dotenv/config";
  import cors from 'cors';
  import http from 'http';
-import  connectDB  from './lib/db.js';
 import userRouter from "./routes/userRoutes.js"
 import messageRouter from './routes/messageRoutes.js';
 import {Server} from  "socket.io";
@@ -15,6 +14,17 @@ import {Server} from  "socket.io";
  export const io = new Server(server,{
    cors:{origin:"*"}
  })
+
+
+ const connect = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
  //STORE ONLINE USERS
  export const userSocketMap = {};
 
@@ -41,10 +51,9 @@ import {Server} from  "socket.io";
 app.use("/api/auth",userRouter);
 app.use("/api/messages",messageRouter)
 
- // Connect to db
- await  connectDB()
 
  const Port = process.env.PORT || 5001 ;
  server.listen(Port , ()=> {
+   connect(); 
     console.log(`server is running on port ${Port}`)
  })
