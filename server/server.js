@@ -4,6 +4,7 @@ import  "dotenv/config";
  import http from 'http';
 import userRouter from "./routes/userRoutes.js"
 import messageRouter from './routes/messageRoutes.js';
+import connectDB from "lib/db.js"
 import {Server} from  "socket.io";
 
 
@@ -11,15 +12,16 @@ import {Server} from  "socket.io";
 app.use(express.json())
  const server = http.createServer(app);
 
- const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO);
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.log(err);
-  }
-};
- connect();
+ //const connect = async () => {
+  //try {
+//await mongoose.connect(process.env.MONGO);
+   // console.log("Connected to MongoDB");
+  //} catch (err) {
+  //  console.log(err);
+  //}
+//};
+ //connect();
+
  // Initalize socket.io server
  export const io = new Server(server,{
    cors:{origin:"*"}
@@ -57,6 +59,7 @@ app.use("/api/messages",messageRouter)
  const Port = process.env.PORT || 5001 ;
  server.listen(Port , ()=> {
   // connect(); 
+  connectDB();
     console.log(`server is running on port ${Port}`)
  })
 
