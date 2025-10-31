@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import axios from "axios";
 import {io} from "socket.io-client"
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+//const backendUrl = import.meta.env.VITE_BACKEND_URL;
 axios.defaults.baseURL = backendUrl;
 export const AuthContext = createContext();
 
@@ -18,7 +18,7 @@ export const AuthProvider  = ({children})=>{
       // AND CONNECT THE SOCKET
       const checkAuth = async()=> {
       try{
-        const {data}=await axios.get("http://localhost:5001/api/auth/check");
+        const {data}=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/check`);
         if(data.success){
             setAuthUser(data.user);
             connectSocket(data.user); 
@@ -34,7 +34,7 @@ export const AuthProvider  = ({children})=>{
 
     const login = async(state , credentials)=>{
         try{
-            const {data} = await axios.post(`http://localhost:5001/api/auth/${state}`,credentials);
+            const {data} = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/${state}`,credentials);
             if(data.success){
                 setAuthUser(data.userData);
                 connectSocket(data.userData);
@@ -66,7 +66,7 @@ export const AuthProvider  = ({children})=>{
 
     const updateProfile = async(body) =>{
         try{
-            const {data} = await axios.put("http://localhost:5001/api/auth/update-profile",body);
+            const {data} = await axios.put("${import.meta.env.VITE_BACKEND_URL}/api/auth/update-profile",body);
             if(data.success){
                 setAuthUser(data.user)
                 toast.success("Profile updated successfully");
