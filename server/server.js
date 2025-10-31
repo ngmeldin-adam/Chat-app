@@ -24,7 +24,7 @@ import {Server} from  "socket.io";
     console.log(err);
   }
 };
-
+ connect();
  //STORE ONLINE USERS
  export const userSocketMap = {};
 
@@ -54,7 +54,7 @@ app.use("/api/messages",messageRouter)
 
  const Port = process.env.PORT || 5001 ;
  server.listen(Port , ()=> {
-   connect(); 
+  // connect(); 
     console.log(`server is running on port ${Port}`)
  })
 
