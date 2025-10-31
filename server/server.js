@@ -52,8 +52,26 @@ app.use("/api/auth",userRouter);
 app.use("/api/messages",messageRouter)
 
 
- const Port = process.env.PORT || 5001 ;
- server.listen(Port , ()=> {
-   connect(); 
-    console.log(`server is running on port ${Port}`)
- })
+// const Port = process.env.PORT || 5001 ;
+// server.listen(Port , ()=> {
+  // connect(); 
+   // console.log(`server is running on port ${Port}`)
+ //})
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB");
+
+    server.listen(Port, () => {
+      console.log(`🚀 Server running on port ${Port}`);
+    });
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+  }
+};
+
+startServer();
