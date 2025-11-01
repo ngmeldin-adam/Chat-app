@@ -4,7 +4,6 @@ import  "dotenv/config";
  import http from 'http';
 import userRouter from "./routes/userRoutes.js"
 import messageRouter from './routes/messageRoutes.js';
-import mongoose from "mongoose";
 import connectDB from "lib/db.js"
 import {Server} from  "socket.io";
 
