@@ -83,7 +83,7 @@ export const AuthProvider  = ({children})=>{
     // USERS UPDATES
     const connectSocket = (userData)=>{
         if(!userData || socket?.connected) return;
-        const newSocket = io(backendUrl, {
+        const newSocket = io(import.meta.env.VITE_BACKEND_URL, {
             query:{
                 userId:userData._id,
             }
