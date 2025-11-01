@@ -23,7 +23,7 @@ const Sidebar = () =>{
           <div className="pd-5">
             <div className="flex justify-between items-center">
                
-                <h3 className="max-w-40 text-[30px]">Chat App</h3>
+                <h3 className="max-w-40 text-[30px] bg-gradient-to-r from-[#217bfe] to-[#8B5CF6] bg-clip-text text-transparent">Chat App</h3>
                 <div className="relative py-2 group">
                     <img src={assets.menu_icon} alt="" className="max-h-5 cursor-pointer"/>
                 <div className="absolute top-full right-0 z-20 w-32 p-5 rounded-md
